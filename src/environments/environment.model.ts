@@ -6,5 +6,6 @@ export interface Environment {
   WS_VENDAS: string;
   WS_PUBLIC: string;
   WS_COMMONS: string;
+  WS_WMS: string;
   WS_TMS: string;
 }

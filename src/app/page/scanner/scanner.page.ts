@@ -152,4 +152,9 @@ export class ScannerPage implements OnInit {
     }
   }
 
+  // by Helio, vai para a tela de detalhes do pedido
+  goToPedidoDetalhes() {
+
+  }
+
 }
