@@ -1,0 +1,173 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="auth.showAlertLogout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title [hidden]="existeEndereco">Auditoria de endereço</ion-title>
+    <ion-title [hidden]="!existeEndereco" style="font-size: 18px;">
+      {{ enderecoAtualParaExibicao }}
+    </ion-title>
+
+    <ion-buttons slot="end" [hidden]="!existeEndereco">
+      <ion-button (click)="clearAuditoria()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <input id="scanner" hideKeyboard class="scanner" [(ngModel)]="valorScanner" (keyup.enter)="scaneado($event)">
+
+  <ion-grid *ngIf="itens.length == 0" [hidden]="existeEndereco" class="noItens">
+    <ion-row class="topHeading">
+      <ion-col>
+        <h3>Escaneie um endereço</h3>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="noImg">
+      <ion-col>
+        <img src="assets/images/13-pedido_rapido/pedido-rapido.png" />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="itens.length == 0" [hidden]="!existeEndereco" class="noItens">
+    <ion-row class="topHeading">
+      <ion-col>
+        <h3>Endereço vazio, adicione pedidos</h3>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="noImg">
+      <ion-col>
+        <img src="assets/images/08-catalogo/pedido-nao-encontrado.png" />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list lines="none" class="listaPedido" *ngIf="itens.length > 0">
+
+          <!-- by Helio, itens no endereço -->
+          <ion-item lines="none" class="pedido" *ngFor="let item of itens; let i = index"
+            [class.conferido]="item.escaneado" [disabled]="item.escaneado" [hidden]="item.escaneado">
+            <ion-grid>
+              <ion-row class="pedidoRow">
+                <ion-col size="12" class="pedidoInformacao">
+                  <ion-row class="pedidoDescri">
+                    <ion-col size="4.5">
+                      Pedido:
+                    </ion-col>
+
+                    <ion-col size="4.5">
+                      Nota Fiscal:
+                    </ion-col>
+
+                    <ion-col size="3">
+                      Volume:
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoValores">
+                    <ion-col size="4.5">
+                      {{ item.numPedido }}
+                    </ion-col>
+
+                    <ion-col size="4.5">
+                      {{ item.numNotaFi }}
+                    </ion-col>
+
+                    <ion-col size="3">
+                      {{ item.volumeAtual }} / {{ item.volumeFinal }}
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoDescri">
+                    <ion-col size="12">
+                      Cliente:
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoCliente">
+                    <ion-col size="12">
+                      {{ item.nomeCliente }}
+                    </ion-col>
+
+                    <!-- <ion-col size="3">
+                      <ion-button color="danger" style="height: 100%; width: 100%; margin: 0;" (click)="removePedido(item, i)">
+                        <ion-icon slot="icon-only" size="large" name="trash-bin-outline"></ion-icon>
+                      </ion-button>
+                    </ion-col> -->
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <!-- by Helio, itens conferidos -->
+          <ion-item lines="none" class="pedido" *ngFor="let item of itens; let i = index"
+            [class.conferido]="item.escaneado" [disabled]="item.escaneado" [hidden]="!item.escaneado">
+            <ion-grid>
+              <ion-row class="pedidoRow">
+                <ion-col size="12" class="pedidoInformacao">
+                  <ion-row class="pedidoDescri">
+                    <ion-col size="4.5">
+                      Pedido:
+                    </ion-col>
+
+                    <ion-col size="4.5">
+                      Nota Fiscal:
+                    </ion-col>
+
+                    <ion-col size="3">
+                      Volume:
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoValores">
+                    <ion-col size="4.5">
+                      {{ item.numPedido }}
+                    </ion-col>
+
+                    <ion-col size="4.5">
+                      {{ item.numNotaFi }}
+                    </ion-col>
+
+                    <ion-col size="3">
+                      {{ item.volumeAtual }} / {{ item.volumeFinal }}
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoDescri">
+                    <ion-col size="12">
+                      Cliente:
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoCliente">
+                    <ion-col size="12">
+                      {{ item.nomeCliente }}
+                    </ion-col>
+
+                    <!-- <ion-col size="3">
+                      <ion-button color="danger" style="height: 100%; width: 100%; margin: 0;" (click)="removePedido(item, i)">
+                        <ion-icon slot="icon-only" size="large" name="trash-bin-outline"></ion-icon>
+                      </ion-button>
+                    </ion-col> -->
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
