@@ -153,6 +153,14 @@ export class ScannerPage implements OnInit {
     }
   }
 
+  // by Helio, limpa os dados da auditoria ao finalizar
+  clearAuditoria() {
+    this.existeEndereco = false;
+    this.enderecoAtual = '';
+    this.enderecoAtualParaExibicao = '';
+    this.itens = [];
+  }
+
   // by Helio, vai para a tela de detalhes do pedido
   goToPedidoDetalhes() {
     // this.navControl.navigateForward();
