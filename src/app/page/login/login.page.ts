@@ -109,7 +109,7 @@ export class LoginPage implements OnInit {
           }
 
           this.appComponent.getStatus();
-          this.navControl.navigateRoot('/home');
+          this.navControl.navigateRoot('/scanner');
           this.common.loading.dismiss();
         }
       }, (error: any) => {
