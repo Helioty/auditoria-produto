@@ -12,10 +12,27 @@ export class EnderecoService {
 
   retornaPedidosEndereco(ende: string) {
     const link = ENV.WS_WMS + API_URL + 'PickingConferencia/' +
-      localStorage.getItem('empresa') + '/nfs?endereco=' + ende;
+      localStorage.getItem('empresa') + '/pickings?endereco=' + ende;
 
     return new Promise((resolve, reject) => {
       this.baseS.get(link).then((result: any) => {
+        console.log('Resultado do retornaPedidosEndereco');
+        console.log(result);
+        resolve(result);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
+  retornaEnderecosPedido(pedi: string) {
+    const link = ENV.WS_WMS + API_URL + 'PickingConferencia/' +
+      localStorage.getItem('empresa') + '/' + pedi + '/endereco';
+
+    return new Promise((resolve, reject) => {
+      this.baseS.get(link).then((result: any) => {
+        console.log('Resultado do retornaEnderecosPedido');
+        console.log(result);
         resolve(result);
       }, (error) => {
         reject(error);

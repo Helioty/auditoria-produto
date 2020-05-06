@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform, AlertController } from '@ionic/angular';
+import { Platform, AlertController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CommonService } from 'src/app/services/common/common.service';
 import { EnderecoService } from 'src/app/services/endereco/endereco.service';
@@ -26,6 +26,7 @@ export class ScannerPage implements OnInit {
     public common: CommonService,
     private alert: AlertController,
     private endereco: EnderecoService,
+    private navControl: NavController,
     private platform: Platform
   ) { }
 
@@ -154,7 +155,7 @@ export class ScannerPage implements OnInit {
 
   // by Helio, vai para a tela de detalhes do pedido
   goToPedidoDetalhes() {
-
+    // this.navControl.navigateForward();
   }
 
 }
