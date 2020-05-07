@@ -27,7 +27,7 @@ export class EnderecoService {
   }
 
   retornaEnderecosPedido(pedi: string) {
-    const link = ENV.WS_WMS + API_URL + 'PickingConferencia/' +
+    const link = ENV.WS_WMS + API_URL + 'PickingConferencia/picking' +
       localStorage.getItem('empresa') + '/' + pedi + '/endereco';
     console.log(link);
 
