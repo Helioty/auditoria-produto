@@ -139,16 +139,12 @@ export class ScannerPage implements OnInit {
   separaObjetos(objts: any) {
     for (let i = 0; i < objts.length; i++) {
       const a = objts[i].split('/');
-      const b = a[1].split('-');
-      const c = a[2].split('-');
-      const pedido = {
-        numPedido: a[0],
-        numNotaFi: b[0],
-        volumeAtual: b[1],
-        volumeFinal: c[0],
-        nomeCliente: c[1],
-        escaneado: false
-      };
+      const b = a[2].split('-');
+      const pedido = new item();
+      pedido.numPedido = a[0];
+      pedido.cliente = a[1];
+      pedido.nuStatus = b[0];
+      pedido.status = b[1];
       this.itens.push(pedido);
     }
   }
@@ -175,4 +171,11 @@ export class ScannerPage implements OnInit {
     // this.navControl.navigateForward();
   }
 
+}
+
+export class item {
+  numPedido = '';
+  cliente = '';
+  nuStatus = '';
+  status = '';
 }

@@ -57,7 +57,8 @@
 
           <!-- by Helio, itens no endereço -->
           <ion-item lines="none" class="pedido" *ngFor="let item of itens; let i = index"
-            [class.conferido]="item.escaneado" [disabled]="item.escaneado" [hidden]="item.escaneado" (click)="getEnderecosPedido(item.numPedido)">
+            [class.conferido]="item.escaneado" [disabled]="item.escaneado" [hidden]="item.escaneado"
+            (click)="getEnderecosPedido(item.numPedido)">
             <ion-grid>
               <ion-row class="pedidoRow">
                 <ion-col size="12" class="pedidoInformacao">
@@ -65,27 +66,11 @@
                     <ion-col size="4.5">
                       Pedido:
                     </ion-col>
-
-                    <ion-col size="4.5">
-                      Nota Fiscal:
-                    </ion-col>
-
-                    <ion-col size="3">
-                      Volume:
-                    </ion-col>
                   </ion-row>
 
                   <ion-row class="pedidoValores">
                     <ion-col size="4.5">
                       {{ item.numPedido }}
-                    </ion-col>
-
-                    <ion-col size="4.5">
-                      {{ item.numNotaFi }}
-                    </ion-col>
-
-                    <ion-col size="3">
-                      {{ item.volumeAtual }} / {{ item.volumeFinal }}
                     </ion-col>
                   </ion-row>
 
@@ -97,14 +82,20 @@
 
                   <ion-row class="pedidoCliente">
                     <ion-col size="12">
-                      {{ item.nomeCliente }}
+                      {{ item.cliente }}
                     </ion-col>
+                  </ion-row>
 
-                    <!-- <ion-col size="3">
-                      <ion-button color="danger" style="height: 100%; width: 100%; margin: 0;" (click)="removePedido(item, i)">
-                        <ion-icon slot="icon-only" size="large" name="trash-bin-outline"></ion-icon>
-                      </ion-button>
-                    </ion-col> -->
+                  <ion-row class="pedidoDescri">
+                    <ion-col size="12">
+                      Status:
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoCliente">
+                    <ion-col size="12">
+                      {{ item.status }}
+                    </ion-col>
                   </ion-row>
                 </ion-col>
               </ion-row>
