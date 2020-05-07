@@ -57,7 +57,7 @@
 
           <!-- by Helio, itens no endereço -->
           <ion-item lines="none" class="pedido" *ngFor="let item of itens; let i = index"
-            [class.conferido]="item.escaneado" [disabled]="item.escaneado" [hidden]="item.escaneado">
+            [class.conferido]="item.escaneado" [disabled]="item.escaneado" [hidden]="item.escaneado" (click)="getEnderecosPedido(item.numPedido)">
             <ion-grid>
               <ion-row class="pedidoRow">
                 <ion-col size="12" class="pedidoInformacao">

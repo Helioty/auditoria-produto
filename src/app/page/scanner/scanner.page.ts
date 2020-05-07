@@ -161,6 +161,15 @@ export class ScannerPage implements OnInit {
     this.itens = [];
   }
 
+  // by Helio
+  getEnderecosPedido(pedido: string) {
+    this.endereco.retornaEnderecosPedido(pedido).then(() => {
+
+    }, (error) => {
+
+    });
+  }
+
   // by Helio, vai para a tela de detalhes do pedido
   goToPedidoDetalhes() {
     // this.navControl.navigateForward();
