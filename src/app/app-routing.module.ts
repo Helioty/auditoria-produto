@@ -14,11 +14,13 @@ const routes: Routes = [
   },
   {
     path: 'scanner',
-    loadChildren: './page/scanner/scanner.module#ScannerPageModule'
+    loadChildren: './page/scanner/scanner.module#ScannerPageModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'pedido-detalhes',
-    loadChildren: './page/pedido-detalhes/pedido-detalhes.module#PedidoDetalhesPageModule'
+    loadChildren: './page/pedido-detalhes/pedido-detalhes.module#PedidoDetalhesPageModule',
+    canActivate: [AuthGuard]
   }
 ];
 

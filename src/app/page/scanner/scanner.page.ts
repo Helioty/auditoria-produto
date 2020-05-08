@@ -3,6 +3,7 @@ import { Platform, AlertController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CommonService } from 'src/app/services/common/common.service';
 import { EnderecoService } from 'src/app/services/endereco/endereco.service';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-scanner',
@@ -159,16 +160,21 @@ export class ScannerPage implements OnInit {
 
   // by Helio
   getEnderecosPedido(pedido: string) {
-    this.endereco.retornaEnderecosPedido(pedido).then(() => {
-
+    this.endereco.retornaEnderecosPedido(pedido).then((result: any) => {
+      this.goToPedidoDetalhes(result);
     }, (error) => {
 
     });
   }
 
   // by Helio, vai para a tela de detalhes do pedido
-  goToPedidoDetalhes() {
-    // this.navControl.navigateForward();
+  goToPedidoDetalhes(pedidoEnde: string[]) {
+    const navExtra: NavigationExtras = {
+      queryParams: {
+        pedido: pedidoEnde
+      }
+    }
+    this.navControl.navigateForward(['/pedido-detalhes'], navExtra);
   }
 
 }
