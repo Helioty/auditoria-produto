@@ -42,63 +42,13 @@ export class EnderecoService {
     });
   }
 
-  removePedidoEndereco(ende: string, notas: string[]) {
-    const link = ENV.WS_WMS + API_URL + 'PickingConferencia/' + localStorage.getItem('empresa') +
-      '/removeNotasDoca?endereco=' + ende;
-
-    return new Promise((resolve, reject) => {
-      this.baseS.post(link, notas).then((result) => {
-        resolve(result);
-      }, (error) => {
-        reject(error);
-      });
-    });
-  }
-
-  adicionarPedidoEndereco(codEmpresa: string, nf: string, ende: string, volu: any) {
-    const link = ENV.WS_WMS + API_URL + 'PickingConferencia/' +
-      codEmpresa + '/' + nf + '/addnoEnderecoNFAudit?endereco=' +
-      ende + '&volume=' + volu.split('/')[0];
-
-    return new Promise((resolve, reject) => {
-      this.baseS.post(link, {}).then((result) => {
-        resolve(result);
-      }, (error) => {
-        reject(error);
-      });
-    });
-  }
-
-  // retorna todos os enderecos para a nota e seus volumes
-  retornaEnderecoNota(codEmpresa: string, nf: string) {
-    const link = ENV.WS_WMS + API_URL + 'PickingConferencia/' +
-      codEmpresa + '/' + nf + '/endereco';
-
-    return new Promise((resolve, reject) => {
-      this.baseS.get(link).then((result) => {
-        resolve(result);
-      }, (error) => {
-        reject(error);
-      });
-    });
-  }
-
-  // retorna o endereco de onde o volume 1 da nota deveria esta
-  retornaEnderecoNotaVolume(codEmpresa: string, nf: string, volu: string) {
-    const link = ENV.WS_WMS + API_URL + 'PickingConferencia/' +
-      codEmpresa + '/' + nf + '/endereco?volume=' + volu;
-
-    return new Promise((resolve, reject) => {
-      this.baseS.get(link).then((result) => {
-        resolve(result);
-      }, (error) => {
-        reject(error);
-      });
-    });
-  }
-
-  retornaProdutosPedido(codEmpresa: string, numPedido: string, depOrigem: string){
-    const link = 'https://auditoriapicking.staging.imb/api/getProdutosPedido/' + codEmpresa + '&' + numPedido + '&' + depOrigem;
+  retornaProdutosPedido(numPedido: string, depOrigem: string) {
+    let link: string;
+    if (depOrigem === '') {
+      link = 'https://auditoriapicking.staging.imb/api/getProdutosPedido/' + localStorage.getItem('empresa') + '&' + numPedido + '&' + depOrigem;
+    } else {
+      link = 'https://auditoriapicking.staging.imb/api/getProdutosPedido/' + localStorage.getItem('empresa') + '&' + numPedido;
+    }
 
     return new Promise((resolve, reject) => {
       this.baseS.get(link).then((result) => {

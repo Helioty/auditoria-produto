@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { CommonService } from 'src/app/services/common/common.service';
 import { EnderecoService } from 'src/app/services/endereco/endereco.service';
 import { NavigationExtras } from '@angular/router';
+import { Item } from 'src/app/class/item';
 
 @Component({
   selector: 'app-scanner',
@@ -141,7 +142,7 @@ export class ScannerPage implements OnInit {
     for (let i = 0; i < objts.length; i++) {
       const a = objts[i].split('/');
       const b = a[2].split('-');
-      const pedido = new item();
+      const pedido = new Item();
       pedido.numPedido = a[0];
       pedido.cliente = a[1];
       pedido.nuStatus = b[0];
@@ -159,8 +160,8 @@ export class ScannerPage implements OnInit {
   }
 
   // by Helio
-  getEnderecosPedido(pedido: string) {
-    this.endereco.retornaEnderecosPedido(pedido).then((result: any) => {
+  getEnderecosPedido(pedido: Item) {
+    this.endereco.retornaEnderecosPedido(pedido.numPedido).then((result: any) => {
       this.goToPedidoDetalhes(result, pedido);
     }, (error) => {
 
@@ -168,21 +169,14 @@ export class ScannerPage implements OnInit {
   }
 
   // by Helio, vai para a tela de detalhes do pedido
-  goToPedidoDetalhes(pedidoEnde: string[], numPedido: string) {
+  goToPedidoDetalhes(pedidoEnde: string[], pedido: Item) {
     const navExtra: NavigationExtras = {
       queryParams: {
-        pedido: pedidoEnde,
-        numPedido: numPedido
+        pedidoEnderecos: pedidoEnde,
+        pedido: JSON.stringify(pedido)
       }
     }
     this.navControl.navigateForward(['/pedido-detalhes'], navExtra);
   }
 
-}
-
-export class item {
-  numPedido = '';
-  cliente = '';
-  nuStatus = '';
-  status = '';
 }

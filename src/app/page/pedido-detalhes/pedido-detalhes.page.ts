@@ -1,6 +1,7 @@
-import { EnderecoService } from 'src/app/services/endereco/endereco.service';
 import { Component, OnInit } from '@angular/core';
-import { PedidoHeader } from 'src/app/class/pedido';
+import { CommonService } from 'src/app/services/common/common.service';
+import { EnderecoService } from 'src/app/services/endereco/endereco.service';
+import { Item, ItemEnderecos } from 'src/app/class/item';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,42 +11,64 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PedidoDetalhesPage implements OnInit {
 
-  public pedido: PedidoHeader;
   public showPedido = false;
+  public showEnderecos = false;
 
-  public pedidoEnd
-  public numPedido;
+  public pedido: Item;
+  public pedidoItemEnderecos: ItemEnderecos;
+  public enderecos: string[] = [];
+
   public depOrigem;
+
   public itens: any[];
 
   constructor(
-    private endereco: EnderecoService,
+    private common: CommonService,
+    private enderecoS: EnderecoService,
     private activatedRoute: ActivatedRoute
-  ) {
-    
-   }
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      this.pedidoEnd = params;
-      this.numPedido = this.pedidoEnd.numPedido;
+      this.pedido = JSON.parse(params['pedido']);
+      this.enderecos = params['pedidoEnderecos'];
     });
-
-    this.getProdutosPedido();
-
-    
+    this.showPedido = true;
+    this.getProdutosPedido(this.pedido.numPedido);
+    this.separaObjetos(this.enderecos);
   }
 
-  async getProdutosPedido(){
-    if(this.depOrigem == undefined){
-      this.depOrigem = "";
-      console.log("foi limpo")
+  async getProdutosPedido(numPedido: string) {
+    if (this.depOrigem == undefined) {
+      this.depOrigem = '';
+      console.log('foi limpo')
     }
-    await this.endereco.retornaProdutosPedido(localStorage.getItem('empresa'), this.numPedido, this.depOrigem).then((result: any)=>{
+    await this.common.showLoader();
+    await this.enderecoS.retornaProdutosPedido(numPedido, this.depOrigem).then((result: any) => {
       console.log(result);
       this.itens = result;
-    })
+      this.common.loading.dismiss();
+    }, (error) => {
+      console.log(error);
+      this.common.loading.dismiss();
+    });
   }
-  
+
+  separaObjetos(objts: string[]) {
+    for (let i = 0; i < objts.length; i++) {
+      const a = objts[i].split('/');
+      const b = a[2].split('-');
+      this.pedidoItemEnderecos = new ItemEnderecos();
+      this.pedidoItemEnderecos.numPedido = a[0];
+      this.pedidoItemEnderecos.cliente = a[1];
+      this.pedidoItemEnderecos.nuStatus = b[0];
+      this.pedidoItemEnderecos.status = b[1];
+      if (a.length >= 4) {
+        for (let g = 3; g < a.length; g++) {
+          this.pedidoItemEnderecos.enderecos.push(a[g]);
+        }
+      }
+    }
+  }
 
 }
