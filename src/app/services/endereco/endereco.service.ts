@@ -98,7 +98,7 @@ export class EnderecoService {
   }
 
   retornaProdutosPedido(codEmpresa: string, numPedido: string, depOrigem: string){
-    const link = 'https://auditoriapicking.staging.imb/getProdutosPedido/' + codEmpresa + '&' + numPedido + '&' + depOrigem;
+    const link = 'https://auditoriapicking.staging.imb/api/getProdutosPedido/' + codEmpresa + '&' + numPedido + '&' + depOrigem;
 
     return new Promise((resolve, reject) => {
       this.baseS.get(link).then((result) => {
