@@ -161,17 +161,18 @@ export class ScannerPage implements OnInit {
   // by Helio
   getEnderecosPedido(pedido: string) {
     this.endereco.retornaEnderecosPedido(pedido).then((result: any) => {
-      this.goToPedidoDetalhes(result);
+      this.goToPedidoDetalhes(result, pedido);
     }, (error) => {
 
     });
   }
 
   // by Helio, vai para a tela de detalhes do pedido
-  goToPedidoDetalhes(pedidoEnde: string[]) {
+  goToPedidoDetalhes(pedidoEnde: string[], numPedido: string) {
     const navExtra: NavigationExtras = {
       queryParams: {
-        pedido: pedidoEnde
+        pedido: pedidoEnde,
+        numPedido: numPedido
       }
     }
     this.navControl.navigateForward(['/pedido-detalhes'], navExtra);
