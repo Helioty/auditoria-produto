@@ -49,7 +49,7 @@ export class ScannerPage implements OnInit {
   }
 
   ionViewDidLeave() {
-    console.clear();
+    //console.clear();
   }
 
   // Cria o loop que da foco no input
