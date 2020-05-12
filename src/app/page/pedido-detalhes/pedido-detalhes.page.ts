@@ -16,6 +16,7 @@ export class PedidoDetalhesPage implements OnInit {
   public pedidoEnd
   public numPedido;
   public depOrigem;
+  public itens: any[];
 
   constructor(
     private endereco: EnderecoService,
@@ -40,8 +41,9 @@ export class PedidoDetalhesPage implements OnInit {
       this.depOrigem = "";
       console.log("foi limpo")
     }
-    await this.endereco.retornaProdutosPedido(localStorage.getItem('empresa'), this.numPedido, this.depOrigem).then(result=>{
+    await this.endereco.retornaProdutosPedido(localStorage.getItem('empresa'), this.numPedido, this.depOrigem).then((result: any)=>{
       console.log(result);
+      this.itens = result;
     })
   }
   

@@ -6,17 +6,67 @@
 
     <ion-title *ngIf="showPedido">Pedido: {{ pedido.numpedido }}</ion-title>
     <ion-title *ngIf="!showPedido">
-      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <!-- <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text> -->
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
+  <ion-item lines="none" class="pedido" *ngFor="let item of itens; let i = index"
+            [class.conferido]="item.escaneado" [disabled]="item.escaneado" [hidden]="item.escaneado"
+            >
+            <ion-grid>
+              <ion-row class="pedidoRow">
+                <ion-col size="12" class="pedidoInformacao">
+                  <ion-row class="pedidoDescri">
+                    <ion-col size="4.5">
+                      Codigo Produto:
+                    </ion-col>
+                  </ion-row>
 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+                  <ion-row class="pedidoValores">
+                    <ion-col size="4.5">
+                      {{ item.CD_PRODUTO }}
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoDescri">
+                    <ion-col size="12">
+                      Quantidade Conferida:
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoCliente">
+                    <ion-col size="12">
+                      {{ item.QUANTIDADE_CONF }}
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoDescri">
+                    <ion-col size="12">
+                      Deposito Origem:
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoCliente">
+                    <ion-col size="12">
+                      {{ item.DEP_ORIGEM }}
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoDescri">
+                    <ion-col size="12">
+                      Conferente:
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row class="pedidoCliente">
+                    <ion-col size="12">
+                      {{ item.CONFERENTE }}
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
 </ion-content>

@@ -1,0 +1,46 @@
+ion-item.pedido {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.4);
+    --inner-padding-end: none !important;
+    --padding-start: none !important;
+    margin-bottom: 10px;
+
+    ion-grid {
+        padding: 0 !important;
+        border: 3px solid transparent;
+        border-radius: 6px;
+
+        ion-row.pedidoRow {
+            min-height: 100px !important;
+            height: 100% !important;
+
+            ion-col.pedidoInformacao {
+                margin: auto 0;
+
+                .pedidoDescri {
+                    color: #4d4d4d;
+                    font-size: 14px;
+                    font-weight: 400;
+
+                    ion-col {
+                        padding-bottom: 0 !important;
+                    }
+                }
+                .pedidoValores {
+                    color: #808080;
+                    font-size: 20px;
+                    font-weight: bold;
+                    white-space: normal;
+                }
+                .pedidoCliente {
+                    color: #636363;
+                    font-size: 14px;
+                    font-weight: bold;
+                    // white-space: normal;
+                }
+            }
+        }
+    }
+}
