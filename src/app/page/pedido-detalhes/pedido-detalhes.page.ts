@@ -38,6 +38,7 @@ export class PedidoDetalhesPage implements OnInit {
   async getProdutosPedido(){
     if(this.depOrigem == undefined){
       this.depOrigem = "";
+      console.log("foi limpo")
     }
     await this.endereco.retornaProdutosPedido(localStorage.getItem('empresa'), this.numPedido, this.depOrigem).then(result=>{
       console.log(result);
