@@ -97,4 +97,16 @@ export class EnderecoService {
     });
   }
 
+  retornaProdutosPedido(codEmpresa: string, numPedido: string, depOrigem: string){
+    const link = 'https://auditoriapicking.staging.imb/getProdutosPedido/' + codEmpresa + '&' + numPedido + '&' + depOrigem;
+
+    return new Promise((resolve, reject) => {
+      this.baseS.get(link).then((result) => {
+        resolve(result);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
 }
