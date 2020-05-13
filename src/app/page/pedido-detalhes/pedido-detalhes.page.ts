@@ -49,8 +49,8 @@ export class PedidoDetalhesPage implements OnInit {
       this.itens = result;
       this.common.loading.dismiss();
     }, (error) => {
-      console.log(error);
       this.common.loading.dismiss();
+      console.log(error);
     });
   }
 
