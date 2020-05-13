@@ -90,7 +90,6 @@ export class ScannerPage implements OnInit {
         const codigo: string = evento.target.value;
 
         if (this.existeEndereco) {
-          // this.checaPedido(codigo);
           this.focusPlay();
         } else {
           this.getPedidosEnde(codigo);

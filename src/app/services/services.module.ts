@@ -6,7 +6,6 @@ import { BaseService } from './HTTP/base-service.service';
 import { CommonService } from './common/common.service';
 import { DataService } from './data/data.service';
 import { EnderecoService } from './endereco/endereco.service';
-import { PedidoService } from './pedido/pedido.service';
 
 
 @NgModule({
@@ -19,8 +18,7 @@ import { PedidoService } from './pedido/pedido.service';
     BaseService,
     CommonService,
     DataService,
-    EnderecoService,
-    PedidoService
+    EnderecoService
   ]
 })
 export class ServicesModule { }

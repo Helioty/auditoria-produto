@@ -15,7 +15,7 @@ export class PedidoDetalhesPage implements OnInit {
   public showEnderecos = false;
 
   public pedido: Item;
-  public pedidoItemEnderecos: ItemEnderecos;
+  public pedidoItemEnderecos: ItemEnderecos[] = [];
   public enderecos: string[] = [];
 
   public depOrigem;
@@ -39,9 +39,9 @@ export class PedidoDetalhesPage implements OnInit {
   }
 
   async getProdutosPedido(numPedido: string) {
-    if (this.depOrigem == undefined) {
+    if (this.depOrigem === undefined) {
       this.depOrigem = '';
-      console.log('foi limpo')
+      console.log('foi limpo');
     }
     await this.common.showLoader();
     await this.enderecoS.retornaProdutosPedido(numPedido, this.depOrigem).then((result: any) => {
@@ -55,20 +55,19 @@ export class PedidoDetalhesPage implements OnInit {
   }
 
   separaObjetos(objts: string[]) {
-    for (let i = 0; i < objts.length; i++) {
-      const a = objts[i].split('/');
+    console.log(objts);
+    objts.forEach(item => {
+      const a = item.split('/');
       const b = a[2].split('-');
-      this.pedidoItemEnderecos = new ItemEnderecos();
-      this.pedidoItemEnderecos.numPedido = a[0];
-      this.pedidoItemEnderecos.cliente = a[1];
-      this.pedidoItemEnderecos.nuStatus = b[0];
-      this.pedidoItemEnderecos.status = b[1];
-      if (a.length >= 4) {
-        for (let g = 3; g < a.length; g++) {
-          this.pedidoItemEnderecos.enderecos.push(a[g]);
-        }
-      }
-    }
+      const F = new ItemEnderecos();
+      F.numPedido = a[0];
+      F.cliente = a[1];
+      F.nuStatus = b[0];
+      F.status = b[1];
+      F.enderecos = a[3];
+      this.showEnderecos = true;
+      this.pedidoItemEnderecos.push(F);
+    });
   }
 
 }
