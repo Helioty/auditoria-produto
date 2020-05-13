@@ -66,21 +66,13 @@ export class BaseService {
       if (error.error.detail) {
         this.common.showAlert(error.error.title, error.error.detail);
       } else {
-        if (environment.production) {
-          this.common.showAlert('Atenção!', 'Sem serviço, entrar em contato com suporte.');
-        } else {
-          this.common.showAlert('Atenção!', JSON.stringify(error));
-        }
+        this.common.showAlert('Atenção!', JSON.stringify(error));
       }
     } else if (error.status === 503) {
       if (error.error.detail) {
         this.common.showAlert(error.error.title, error.error.detail);
       } else {
-        if (environment.production) {
-          this.common.showAlert('Atenção!', 'Sem serviço, entrar em contato com suporte.');
-        } else {
-          this.common.showAlert('Atenção!', JSON.stringify(error));
-        }
+        this.common.showAlert('Atenção!', JSON.stringify(error));
       }
     } else if (error.status === 0) {
       this.common.showAlert(error.statusText, error.message);
@@ -88,11 +80,7 @@ export class BaseService {
       if (error.error.detail) {
         this.common.showAlert(error.error.title, error.error.detail);
       } else {
-        if (environment.production) {
-          this.common.showAlert('Atenção!', 'Sem serviço, entrar em contato com suporte.');
-        } else {
-          this.common.showAlert('Atenção!', JSON.stringify(error));
-        }
+        this.common.showAlert('Atenção!', JSON.stringify(error));
       }
     }
   }

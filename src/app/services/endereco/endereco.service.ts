@@ -45,9 +45,9 @@ export class EnderecoService {
   retornaProdutosPedido(numPedido: string, depOrigem: string) {
     let link: string;
     if (depOrigem === '') {
-      link = 'https://auditoriapicking.staging.imb/api/getProdutosPedido/' + localStorage.getItem('empresa') + '&' + numPedido + '&' + depOrigem;
+      link = 'https://auditoria-picking.' + API_URL + 'api/getProdutosPedido/' + localStorage.getItem('empresa') + '&' + numPedido + '&' + depOrigem;
     } else {
-      link = 'https://auditoriapicking.staging.imb/api/getProdutosPedido/' + localStorage.getItem('empresa') + '&' + numPedido;
+      link = 'https://auditoria-picking.' + API_URL + 'api/getProdutosPedido/' + localStorage.getItem('empresa') + '&' + numPedido;
     }
 
     return new Promise((resolve, reject) => {
