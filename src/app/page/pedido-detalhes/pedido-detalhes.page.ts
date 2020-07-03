@@ -34,6 +34,7 @@ export class PedidoDetalhesPage implements OnInit {
       this.enderecos = params['pedidoEnderecos'];
     });
     this.showPedido = true;
+    console.log(this.pedido);
     this.getProdutosPedido(this.pedido.numPedido);
     this.separaObjetos(this.enderecos);
   }

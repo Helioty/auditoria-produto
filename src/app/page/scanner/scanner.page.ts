@@ -132,7 +132,9 @@ export class ScannerPage implements OnInit {
       });
       this.enderecoAtualParaExibicao = b;
     } else {
-      this.enderecoAtualParaExibicao = endereco;
+      this.endereco.getAdress(endereco).then((result: any) => {
+        this.enderecoAtualParaExibicao = result.endereco;
+      });
     }
   }
 
