@@ -39,6 +39,10 @@ export class PedidoDetalhesPage implements OnInit {
     this.separaObjetos(this.enderecos);
   }
 
+  ionViewWillLeave() {
+    console.clear();
+  }
+
   async getProdutosPedido(numPedido: string) {
     if (this.depOrigem === undefined) {
       this.depOrigem = '';

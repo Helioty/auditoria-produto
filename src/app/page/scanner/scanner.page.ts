@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform, AlertController, NavController } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CommonService } from 'src/app/services/common/common.service';
 import { EnderecoService } from 'src/app/services/endereco/endereco.service';
@@ -26,7 +26,6 @@ export class ScannerPage implements OnInit {
   constructor(
     public auth: AuthService,
     public common: CommonService,
-    private alert: AlertController,
     private endereco: EnderecoService,
     private navControl: NavController,
     private platform: Platform
@@ -37,7 +36,6 @@ export class ScannerPage implements OnInit {
 
   ionViewWillEnter() {
     this.focusOn();
-    console.log('WillEnter Rapido');
     this.common.goToFullScreen();
   }
 
@@ -50,7 +48,7 @@ export class ScannerPage implements OnInit {
   }
 
   ionViewDidLeave() {
-    //console.clear();
+    // console.clear();
   }
 
   // Cria o loop que da foco no input
@@ -113,8 +111,8 @@ export class ScannerPage implements OnInit {
       console.log(result);
       this.common.loading.dismiss();
     }, (error) => {
-      console.log(error);
       this.common.loading.dismiss();
+      console.log(error);
     });
   }
 
@@ -140,8 +138,8 @@ export class ScannerPage implements OnInit {
 
   // by Helio, organiza as notas do endereço
   separaObjetos(objts: any) {
-    for (let i = 0; i < objts.length; i++) {
-      const a = objts[i].split('/');
+    objts.forEach((el: string) => {
+      const a = el.split('/');
       const b = a[2].split('-');
       const pedido = new Item();
       pedido.numPedido = a[0];
@@ -149,7 +147,17 @@ export class ScannerPage implements OnInit {
       pedido.nuStatus = b[0];
       pedido.status = b[1];
       this.itens.push(pedido);
-    }
+    });
+    // for (let i = 0; i < objts.length; i++) {
+    //   const a = objts[i].split('/');
+    //   const b = a[2].split('-');
+    //   const pedido = new Item();
+    //   pedido.numPedido = a[0];
+    //   pedido.cliente = a[1];
+    //   pedido.nuStatus = b[0];
+    //   pedido.status = b[1];
+    //   this.itens.push(pedido);
+    // }
   }
 
   // by Helio, limpa os dados da auditoria ao finalizar
@@ -176,7 +184,7 @@ export class ScannerPage implements OnInit {
         pedidoEnderecos: pedidoEnde,
         pedido: JSON.stringify(pedido)
       }
-    }
+    };
     this.navControl.navigateForward(['/pedido-detalhes'], navExtra);
   }
 

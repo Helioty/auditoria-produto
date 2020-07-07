@@ -10,5 +10,5 @@ export class ItemEnderecos {
     cliente = '';
     nuStatus = '';
     status = '';
-    enderecos = ''
+    enderecos = '';
 }
